@@ -6,9 +6,9 @@ const OpeningScreen = ({ navigation }) => {
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('../assets/logo.png')} // Replace with your actual logo path
+        source={require('../assets/logo.png')} // Path to your logo file
         style={styles.logo}
-        resizeMode="contain"
+        resizeMode="contain" // Ensures the logo fits properly
       />
 
       {/* Title */}
@@ -17,14 +17,14 @@ const OpeningScreen = ({ navigation }) => {
       {/* Buttons */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignUpScreen')} // Navigate to SignUpScreen
+        onPress={() => navigation.navigate('SignUpScreen')}
       >
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => alert('Log In Pressed!')} // You can add navigation here too
+        onPress={() => navigation.navigate('LoginScreen')}
       >
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    width: 150,
+    width: 150, // Adjust size of the logo
     height: 150,
-    marginBottom: 20,
+    marginBottom: 20, // Space between logo and title
   },
   title: {
     fontSize: 28,
@@ -66,3 +66,5 @@ const styles = StyleSheet.create({
 });
 
 export default OpeningScreen;
+
+
