@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const OpeningScreen = () => {
+const OpeningScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('../assets/logo.png')} // Replace 'logo.png' with the actual name of your logo image
+        source={require('../assets/logo.png')} // Replace with your actual logo path
         style={styles.logo}
         resizeMode="contain"
       />
@@ -15,11 +15,17 @@ const OpeningScreen = () => {
       <Text style={styles.title}>Quick Chef</Text>
 
       {/* Buttons */}
-      <TouchableOpacity style={styles.button} onPress={() => alert('Sign Up Pressed!')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('SignUpScreen')} // Navigate to SignUpScreen
+      >
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => alert('Log In Pressed!')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => alert('Log In Pressed!')} // You can add navigation here too
+      >
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
     </View>
@@ -34,27 +40,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    width: 150, // Width of the logo
-    height: 150, // Height of the logo
-    marginBottom: 20, // Add spacing below the logo
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   button: {
-    backgroundColor: '#ff7043',
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    marginVertical: 10,
-    width: '25%',
+    backgroundColor: '#000',
+    width: '80%',
+    height: 50,
+    justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 8,
+    marginTop: 20,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
