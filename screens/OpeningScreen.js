@@ -1,30 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const OpeningScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('../assets/logo.png')} // Path to your logo file
+        source={require('../assets/logo.png')} // Adjust the path if needed
         style={styles.logo}
-        resizeMode="contain" // Ensures the logo fits properly
+        resizeMode="contain"
       />
 
       {/* Title */}
       <Text style={styles.title}>Quick Chef</Text>
 
-      {/* Buttons */}
+      {/* Sign Up Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignUpScreen')}
+        onPress={() => navigation.navigate('SignUpScreen')} // Navigate to SignUpScreen
       >
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
+      {/* Log In Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('LoginScreen')}
+        onPress={() => navigation.navigate('LogInScreen')} // Navigate to LogInScreen
       >
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
@@ -40,9 +41,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    width: 150, // Adjust size of the logo
+    width: 150,
     height: 150,
-    marginBottom: 20, // Space between logo and title
+    marginBottom: 20,
   },
   title: {
     fontSize: 28,
@@ -66,5 +67,9 @@ const styles = StyleSheet.create({
 });
 
 export default OpeningScreen;
+
+
+
+
 
 
