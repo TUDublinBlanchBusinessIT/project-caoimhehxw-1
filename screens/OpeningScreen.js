@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const OpeningScreen = ({ navigation }) => {
+  console.log('Opening Screen message');
   return (
     <View style={styles.container}>
       {/* Logo */}

@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
 
 const RecipeGeneratorScreen = () => {
   const [ingredients, setIngredients] = useState('');
   const [recipes, setRecipes] = useState([]);
 
-  // Predefined recipe list
+  // Predefined list of recipes
   const allRecipes = [
     { name: 'Pasta Salad', ingredients: ['pasta', 'tomato', 'olive oil'] },
     { name: 'Tomato Soup', ingredients: ['tomato', 'garlic', 'onion'] },
     { name: 'Fruit Salad', ingredients: ['apple', 'banana', 'orange'] },
     { name: 'Scrambled Eggs', ingredients: ['egg', 'milk', 'butter'] },
+    { name: 'Grilled Cheese', ingredients: ['bread', 'cheese', 'butter'] },
   ];
 
   const findRecipes = () => {
+    if (!ingredients.trim()) {
+            Alert.alert('Error', 'Please enter some ingredients.');
+      return;
+    }
     const userIngredients = ingredients.toLowerCase().split(',').map((item) => item.trim());
     const matchingRecipes = allRecipes.filter((recipe) =>
-      recipe.ingredients.every((ingredient) => userIngredients.includes(ingredient))
+      recipe.ingredients.some((ingredient) => userIngredients.includes(ingredient))
     );
+
+    if (matchingRecipes.length === 0) {      
+      Alert.alert('No Recipes Found', 'Try adding more or different ingredients.');
+    }
 
     setRecipes(matchingRecipes);
   };
@@ -41,7 +50,7 @@ const RecipeGeneratorScreen = () => {
         <Text style={styles.buttonText}>Find Recipes</Text>
       </TouchableOpacity>
 
-      {/* Recipes Output */}
+       {/* Recipes Output */}
       <Text style={styles.subtitle}>Recipes:</Text>
       <FlatList
         data={recipes}

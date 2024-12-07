@@ -6,6 +6,7 @@ import firebaseApp from "../firebase"; // Import initialized Firebase app
 const db = getFirestore(firebaseApp); // Initialize Firestore
 
 const SignUpScreen = () => {
+  console.log('Signup Screen message');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -9,6 +9,7 @@ import RecipeGeneratorScreen from './screens/RecipeGeneratorScreen'; // Import t
 const Stack = createStackNavigator();
 
 const App = () => {
+  console.log('App.js message');
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OpeningScreen">
