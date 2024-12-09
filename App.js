@@ -7,6 +7,7 @@ import LogInScreen from './screens/LogInScreen';
 import RecipeGeneratorScreen from './screens/RecipeGeneratorScreen'; 
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
 
+
 const Stack = createStackNavigator();
 
 const App = () => {
