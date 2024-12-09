@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
 
-const RecipeGeneratorScreen = () => {
+const RecipeGeneratorScreen = ({ navigation }) => {
   const [ingredients, setIngredients] = useState('');
   const [recipes, setRecipes] = useState([]);
 
   // Predefined list of recipes
   const allRecipes = [
-    { name: 'Pasta Salad', ingredients: ['pasta', 'tomato', 'olive oil'] },
-    { name: 'Tomato Soup', ingredients: ['tomato', 'garlic', 'onion'] },
-    { name: 'Fruit Salad', ingredients: ['apple', 'banana', 'orange'] },
-    { name: 'Scrambled Eggs', ingredients: ['egg', 'milk', 'butter'] },
-    { name: 'Grilled Cheese', ingredients: ['bread', 'cheese', 'butter'] },
+    { name: 'Pasta Salad', ingredients: ['pasta', 'tomato', 'olive oil'], guide: 'Boil pasta, mix with diced tomatoes and olive oil.' },
+    { name: 'Tomato Soup', ingredients: ['tomato', 'garlic', 'onion'], guide: 'Simmer tomatoes, garlic, and onion in a pot for 20 minutes.' },
+    { name: 'Fruit Salad', ingredients: ['apple', 'banana', 'orange'], guide: 'Chop fruits and mix them in a bowl.' },
+    { name: 'Scrambled Eggs', ingredients: ['egg', 'milk', 'butter'], guide: 'Whisk eggs with milk, cook in a pan with butter.' },
+    { name: 'Grilled Cheese', ingredients: ['bread', 'cheese', 'butter'], guide: 'Butter the bread, add cheese, and grill until golden brown.' },
   ];
 
   const findRecipes = () => {
     if (!ingredients.trim()) {
-            Alert.alert('Error', 'Please enter some ingredients.');
+      Alert.alert('Error', 'Please enter some ingredients.');
       return;
     }
     const userIngredients = ingredients.toLowerCase().split(',').map((item) => item.trim());
@@ -24,7 +24,7 @@ const RecipeGeneratorScreen = () => {
       recipe.ingredients.some((ingredient) => userIngredients.includes(ingredient))
     );
 
-    if (matchingRecipes.length === 0) {      
+    if (matchingRecipes.length === 0) {
       Alert.alert('No Recipes Found', 'Try adding more or different ingredients.');
     }
 
@@ -33,10 +33,8 @@ const RecipeGeneratorScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Title */}
       <Text style={styles.title}>Recipe Generator</Text>
 
-      {/* Input Field */}
       <TextInput
         style={styles.input}
         placeholder="Enter ingredients (e.g., tomato, egg)"
@@ -45,23 +43,24 @@ const RecipeGeneratorScreen = () => {
         onChangeText={setIngredients}
       />
 
-      {/* Search Button */}
       <TouchableOpacity style={styles.button} onPress={findRecipes}>
         <Text style={styles.buttonText}>Find Recipes</Text>
       </TouchableOpacity>
 
-       {/* Recipes Output */}
       <Text style={styles.subtitle}>Recipes:</Text>
       <FlatList
         data={recipes}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <View style={styles.recipeItem}>
+          <TouchableOpacity
+            style={styles.recipeItem}
+            onPress={() => navigation.navigate('RecipeDetailScreen', { recipe: item })}
+          >
             <Text style={styles.recipeName}>{item.name}</Text>
             <Text style={styles.recipeIngredients}>
               Ingredients: {item.ingredients.join(', ')}
             </Text>
-          </View>
+          </TouchableOpacity>
         )}
         ListEmptyComponent={<Text style={styles.noRecipes}>No matching recipes found.</Text>}
       />
