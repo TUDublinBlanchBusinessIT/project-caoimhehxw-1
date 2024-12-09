@@ -2,32 +2,25 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const OpeningScreen = ({ navigation }) => {
-  console.log('Opening Screen message');
   return (
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('../assets/logo.png')} // Adjust the path if needed
-        style={styles.logo}
+        source={require('../assets/logo.png')} // Ensure this is the correct path to your logo
+        style={styles.logoImage}
         resizeMode="contain"
       />
 
-      {/* Title */}
-      <Text style={styles.title}>Quick Chef</Text>
+      {/* App Name */}
+      <Text style={styles.logoText}>Quick Chef</Text>
 
       {/* Sign Up Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('SignUpScreen')} // Navigate to SignUpScreen
-      >
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUpScreen')}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
       {/* Log In Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('LogInScreen')} // Navigate to LogInScreen
-      >
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LogInScreen')}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
     </View>
@@ -39,38 +32,32 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f8e0', // Light green background
   },
-  logo: {
+  logoImage: {
     width: 150,
     height: 150,
-    marginBottom: 20,
+    marginBottom: 20, // Adds spacing below the logo
   },
-  title: {
-    fontSize: 28,
+  logoText: {
+    fontSize: 32,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: '#000', // Black color for "Quick Chef"
+    marginBottom: 40, // Adds spacing below the text
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#4CAF50', // Green background for buttons
+    padding: 15,
     width: '80%',
-    height: 50,
-    justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
     marginTop: 20,
   },
   buttonText: {
-    color: '#fff',
+    color: '#fff', // White text color
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
 export default OpeningScreen;
-
-
-
-
-
-

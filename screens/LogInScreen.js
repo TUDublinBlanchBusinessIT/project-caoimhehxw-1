@@ -1,55 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
-import firebaseApp from '../firebase'; // Import initialized Firebase app
-
-const db = getFirestore(firebaseApp); // Initialize Firestore
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 
 const LogInScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      console.log('Handle login');
-      // Input validation
-      if (!username || !password) {
-        Alert.alert('Error', 'Please fill in all fields.');
-        console.log('5 Handle login');
-        return;
-      }
-
-      // Query Firestore for the username
-      const userQuery = query(collection(db, 'Users'), where('User Name', '==', username));
-      const querySnapshot = await getDocs(userQuery);
-
-      if (querySnapshot.empty) {
-        Alert.alert('Error', 'Username not found.');
-        console.log('4 Handle login');
-        return;
-      }
-
-      // Validate password
-      let validLogin = false;
-      querySnapshot.forEach((doc) => {
-        const userData = doc.data();
-        if (userData.Password === password) {
-          validLogin = true;
-        }
-      });
-
-      if (validLogin) {
-        Alert.alert('Success', 'Login successful!');
-        console.log('2 Handle login');
-        navigation.navigate('RecipeGeneratorScreen'); // Navigate to HomeScreen or the next screen
-      } else {
-        Alert.alert('Error', 'Invalid password. Please try again.');
-        console.log('3 Handle login');
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-      Alert.alert('Error', 'An error occurred during login. Please try again.');
-    }    
+  const handleLogin = () => {
+    // Perform login logic here
+    console.log('Username:', username);
+    console.log('Password:', password);
+    // Navigate to Recipe Generator screen upon successful login
+    navigation.navigate('RecipeGeneratorScreen');
   };
 
   return (
@@ -74,11 +35,6 @@ const LogInScreen = ({ navigation }) => {
         onChangeText={setPassword}
       />
 
-      {/* Forgot Password */}
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Forgot password?</Text>
-      </TouchableOpacity>
-
       {/* Log In Button */}
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
@@ -99,6 +55,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 30,
     textAlign: 'center',
+    color: '#333',
   },
   input: {
     width: '80%',
@@ -110,19 +67,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 16,
   },
-  forgotPassword: {
-    color: '#007BFF',
-    fontSize: 14,
-    marginVertical: 10,
-    textDecorationLine: 'underline',
-  },
   button: {
-    backgroundColor: '#000',
-    width: '80%',
+    backgroundColor: '#4CAF50', // Same green as OpeningScreen button
     padding: 15,
-    justifyContent: 'center',
+    width: '80%',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 8, // Matches the rounded corners aesthetic
     marginTop: 20,
   },
   buttonText: {
