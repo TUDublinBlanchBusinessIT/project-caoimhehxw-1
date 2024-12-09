@@ -31,6 +31,12 @@ const RecipeGeneratorScreen = ({ navigation }) => {
     setRecipes(matchingRecipes);
   };
 
+  const handleLogout = () => {
+    // Perform logout operations if needed
+    console.log('User logged out');
+    navigation.navigate('OpeningScreen'); // Navigate back to the OpeningScreen
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Recipe Generator</Text>
@@ -64,6 +70,11 @@ const RecipeGeneratorScreen = ({ navigation }) => {
         )}
         ListEmptyComponent={<Text style={styles.noRecipes}>No matching recipes found.</Text>}
       />
+
+      {/* Log Out Button */}
+      <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
+        <Text style={styles.buttonText}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -93,6 +104,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
+    marginTop: 10,
   },
   buttonText: {
     color: '#fff',
@@ -124,6 +136,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
     textAlign: 'center',
+  },
+  logoutButton: {
+    backgroundColor: '#f44336', // Red color for logout
   },
 });
 
